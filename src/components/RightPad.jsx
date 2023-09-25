@@ -4,7 +4,7 @@ import React from 'react'
 const RightPad = () => {
   return (
       <MDBCard shadow='0' alignment='center'>
-          <MDBCardBody>
+          <MDBCardBody className='p-1'>
               <div className='d-flex justify-content-center'>
               <MDBSwitch id='flexSwitchCheckDefault' />
                 <p className='ms-2'>Power</p>
