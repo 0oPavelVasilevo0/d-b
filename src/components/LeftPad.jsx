@@ -1,66 +1,101 @@
-import { MDBBtn, MDBBtnGroup, MDBCard, MDBCardBody, MDBCardFooter, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol, MDBContainer, MDBRow } from 'mdb-react-ui-kit'
-import React from 'react'
+import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBRow } from 'mdb-react-ui-kit'
+import React, { useEffect } from 'react'
 
 const LeftPad = () => {
+
+    // Function to handle the click event on a drum pad
+    const handleClick = (audioId) => {
+        const audioElement = document.getElementById(audioId);
+        if (audioElement) {
+            audioElement.currentTime = 0;
+            audioElement.play();
+        }
+    };
+
+    // Function to handle keyboard events
+    const handleKeyDown = (event) => {
+        // Define the mapping between keyboard keys and audio IDs
+        const keyToAudioIdMap = {
+            Q: 'Q',
+            W: 'W',
+            E: 'E',
+            A: 'A',
+            S: 'S',
+            D: 'D',
+            Z: 'Z',
+            X: 'X',
+            C: 'C',
+        };
+
+        // Check if the pressed key has a corresponding audio ID
+        const audioId = keyToAudioIdMap[event.key.toUpperCase()];
+
+        if (audioId) {
+            handleClick(audioId);
+        }
+    };
+
+    // Add event listeners for keydown
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     return (
-        //   <MDBContainer className='border d-flex flex-column justify-content-center align-items-center ms-0' style={{ width: '20vw', marginRight: 'auto' }}>
-        //       <MDBBtnGroup shadow='0' size='lg'>
-        //           <MDBBtn color='light' className='me-2'>
-        //               Left
-        //           </MDBBtn>
-        //           <MDBBtn color='light' className='me-2'>
-        //               Middle
-        //           </MDBBtn>
-        //           <MDBBtn color='light' className='me-2'>
-        //               Right
-        //           </MDBBtn>
-        //       </MDBBtnGroup>
-        //       <MDBBtnGroup shadow='0' size='lg'>
-        //           <MDBBtn color='light' className='me-2'>
-        //               Left
-        //           </MDBBtn>
-        //           <MDBBtn color='light' className='me-2'>
-        //               Middle
-        //           </MDBBtn>
-        //           <MDBBtn color='light' className='me-2'>
-        //               Right
-        //           </MDBBtn>
-        //       </MDBBtnGroup>
-        //       <MDBBtnGroup size='lg'>
-        //           <MDBBtn color='light'>tap</MDBBtn>
-        //       </MDBBtnGroup>
-        //   </MDBContainer>
-
-
         <MDBCard shadow='0'>
             <MDBCardBody className='p-1'>
-                {/* <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
 
-                </MDBRow> */}
-                {/* <MDBCardText> */}
                 <MDBRow className='row-cols-1 row-cols-md-1 g-4'>
                     <MDBCol className='d-flex  justify-content-center'>
-                        <MDBBtn size='lg'>Q</MDBBtn>
-                        <MDBBtn size='lg' className='mx-4'>W</MDBBtn>
-                        <MDBBtn size='lg'>E</MDBBtn>
+                        <MDBBtn size='lg' className='drum-pad' onClick={() => handleClick('Q')}>
+                            <audio className='clip' id='Q' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'></audio>
+                            Q
+                        </MDBBtn>
+                        <MDBBtn size='lg' className='mx-4 drum-pad'  onClick={() => handleClick('W')}>
+                            <audio className='clip' id='W' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'></audio>
+                            W
+                        </MDBBtn>
+                        <MDBBtn size='lg' className='drum-pad'  onClick={() => handleClick('E')}>
+                            <audio className='clip' id='E' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'></audio>
+                            E
+                        </MDBBtn>
                     </MDBCol>
 
                     <MDBCol className='d-flex  justify-content-center'>
-                        <MDBBtn size='lg'>A</MDBBtn>
-                        <MDBBtn size='lg' className='mx-4'>S</MDBBtn>
-                        <MDBBtn size='lg'>D</MDBBtn>
+                        <MDBBtn size='lg' className='drum-pad'  onClick={() => handleClick('A')}>
+                            <audio className='clip' id='A' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'></audio>
+                            A
+                        </MDBBtn>
+                        <MDBBtn size='lg' className='mx-4 drum-pad'  onClick={() => handleClick('S')}>
+                            <audio className='clip' id='S' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'></audio>
+                            S
+                        </MDBBtn>
+                        <MDBBtn size='lg' className='drum-pad'  onClick={() => handleClick('D')}>
+                            <audio className='clip' id='D' src='https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'></audio>
+                            D
+                        </MDBBtn>
                     </MDBCol>
 
                     <MDBCol className='d-flex  justify-content-center'>
-                        <MDBBtn size='lg'>Z</MDBBtn>
-                        <MDBBtn size='lg' className='mx-4'>X</MDBBtn>
-                        <MDBBtn size='lg'>C</MDBBtn>
+                        <MDBBtn size='lg' className='drum-pad'  onClick={() => handleClick('Z')}>
+                            <audio className='clip' id='Z' src='https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'></audio>
+                            Z
+                        </MDBBtn>
+                        <MDBBtn size='lg' className='mx-4 drum-pad'  onClick={() => handleClick('X')}>
+                            <audio className='clip' id='X' src='https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'></audio>
+                            X
+                        </MDBBtn>
+                        <MDBBtn size='lg' className='drum-pad'  onClick={() => handleClick('C')}>
+                            <audio className='clip' id='C' src='https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'></audio>
+                            C
+                        </MDBBtn>
                     </MDBCol>
 
 
 
                 </MDBRow>
-                {/* </MDBCardText> */}
             </MDBCardBody>
         </MDBCard>
 
