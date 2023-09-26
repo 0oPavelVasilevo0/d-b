@@ -7,7 +7,7 @@ const RightPad = () => {
           <MDBCardBody className='p-1'>
               <div className='d-flex justify-content-center'>
               <MDBSwitch id='flexSwitchCheckDefault' />
-                <p className='ms-2'>PowerOFF</p>
+                <p className='ms-2'>Power</p>
               </div>
               <MDBRange
                   defaultValue={50}
