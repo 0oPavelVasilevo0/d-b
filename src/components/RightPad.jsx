@@ -1,7 +1,17 @@
 import { MDBBtnGroup, MDBCard, MDBCardBody, MDBRadio, MDBRange, MDBSwitch } from 'mdb-react-ui-kit'
-import React from 'react'
+import React, { useState } from 'react'
 
 const RightPad = ({ powerOn, togglePower }) => {
+    // State variable to manage the volume level (initially set to 50)
+    const [volume, setVolume] = useState(50);
+
+    // Function to handle changes in the volume level
+    const handleVolumeChange = (event) => {
+        const newVolume = event.target.value;
+        setVolume(newVolume);
+        // You can add code here to update the audio volume based on the newVolume value
+    };
+
     return (
         <MDBCard shadow='0' alignment='center'>
             <MDBCardBody className='p-1'>
@@ -14,7 +24,8 @@ const RightPad = ({ powerOn, togglePower }) => {
                     <p className='ms-2'>Power</p>
                 </div>
                 <MDBRange
-                    defaultValue={50}
+                    value={volume} // Set the volume value to the state variable
+                    onChange={handleVolumeChange} // Call handleVolumeChange when the range is adjusted
                     id='customRange'
                     label='Volume'
                 />

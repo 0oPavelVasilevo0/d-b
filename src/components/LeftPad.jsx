@@ -1,19 +1,29 @@
 import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBRow } from 'mdb-react-ui-kit'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './../App.css'
 
-const LeftPad = ({powerOn}) => {
+const LeftPad = ({ powerOn, volume }) => {
+    const [audioElements, setAudioElements] = useState({});
 
     // Function to handle the click event on a drum pad
     const handleClick = (audioId) => {
         if (powerOn) {
-        const audioElement = document.getElementById(audioId);
-        if (audioElement) {
-            audioElement.currentTime = 0;
-            audioElement.play();
-        }
+            const audioElement = audioElements[audioId];
+            if (audioElement) {
+                audioElement.currentTime = 0;
+
+                // Check if the volume is a finite number and within the valid range
+                const adjustedVolume = parseFloat(volume / 100);
+                if (!isNaN(adjustedVolume) && adjustedVolume >= 0 && adjustedVolume <= 1) {
+                    audioElement.volume = adjustedVolume;
+                    audioElement.play();
+                } else {
+                    console.error("Invalid volume:", volume);
+                }
+            }
         }
     };
+
 
     // Function to handle keyboard events
     const handleKeyDown = (event) => {
@@ -44,7 +54,23 @@ const LeftPad = ({powerOn}) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, ); // []
+    }, []); // []
+
+    useEffect(() => {
+        // Create and store audio elements in the state
+        const audioElements = {
+            Q: document.getElementById('Q'),
+            W: document.getElementById('W'),
+            E: document.getElementById('E'),
+            A: document.getElementById('A'),
+            S: document.getElementById('S'),
+            D: document.getElementById('D'),
+            Z: document.getElementById('Z'),
+            X: document.getElementById('X'),
+            C: document.getElementById('C'),
+        };
+        setAudioElements(audioElements);
+    }, []);
 
     return (
         <MDBCard shadow='0'>
@@ -52,7 +78,7 @@ const LeftPad = ({powerOn}) => {
 
                 <MDBRow className='row-cols-1 row-cols-md-1 g-2'>
                     <MDBCol className='d-flex  justify-content-center'>
-                        <MDBBtn size='lg'  outline color='dark' className='drum-pad' onClick={() => handleClick('Q')}>
+                        <MDBBtn size='lg' outline color='dark' className='drum-pad' onClick={() => handleClick('Q')}>
                             <audio className='clip' id='Q' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'></audio>
                             Q
                         </MDBBtn>
@@ -98,8 +124,7 @@ const LeftPad = ({powerOn}) => {
                 </MDBRow>
             </MDBCardBody>
         </MDBCard>
-
     )
 }
 
-export default LeftPad
+export default LeftPad;
