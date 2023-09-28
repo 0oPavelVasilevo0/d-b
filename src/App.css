@@ -10,6 +10,11 @@
   height: 100vh;
 }
 
+.drum-pad {
+  background-color: aqua;
+  width: 5rem;
+  height: 3rem;
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
