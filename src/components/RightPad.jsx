@@ -1,9 +1,9 @@
-import { MDBBtnGroup, MDBCard, MDBCardBody, MDBRadio, MDBRange, MDBSwitch } from 'mdb-react-ui-kit'
-import React, { useState } from 'react'
+import { MDBBtnGroup, MDBCard, MDBCardBody, MDBContainer, MDBRadio, MDBRange, MDBSwitch } from 'mdb-react-ui-kit'
+import React, { useEffect, useState } from 'react'
 
-const RightPad = ({ powerOn, togglePower }) => {
+const RightPad = ({ powerOn, togglePower, setVolumeHandler, displayText, setDisplayText }) => {
     // State variable to manage the volume level (initially set to 50)
-    const [volume, setVolume] = useState(50);
+    const [volume, setVolume] = useState(20);
 
     // Function to handle changes in the volume level
     const handleVolumeChange = (event) => {
@@ -11,6 +11,13 @@ const RightPad = ({ powerOn, togglePower }) => {
         setVolume(newVolume);
         // You can add code here to update the audio volume based on the newVolume value
     };
+
+    useEffect(() => {
+        // Clear the display text when power is turned off
+        if (!powerOn) {
+            setDisplayText('');
+        }
+    }, [powerOn, setDisplayText]);
 
     return (
         <MDBCard shadow='0' alignment='center'>
@@ -23,9 +30,15 @@ const RightPad = ({ powerOn, togglePower }) => {
                     />
                     <p className='ms-2'>Power</p>
                 </div>
+                <MDBContainer id='display' className='bg-secondary text-light' style={{ width: '12rem', height: '2rem' }}>
+                    {displayText}
+                    </MDBContainer>
                 <MDBRange
                     value={volume} // Set the volume value to the state variable
-                    onChange={handleVolumeChange} // Call handleVolumeChange when the range is adjusted
+                    onChange={(event) => {
+                        handleVolumeChange(event);
+                        setVolumeHandler(event.target.value);
+                     }} // Call handleVolumeChange when the range is adjusted
                     id='customRange'
                     label='Volume'
                 />
