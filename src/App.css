@@ -11,9 +11,17 @@
 }
 
 .drum-pad {
-  background-color: aqua;
-  width: 5rem;
+  background-color: black;
+  width: 6rem;
   height: 3rem;
+  color: white;
+}
+.drum-pad_active {
+  background-color: aquamarine;
+}
+
+.drum-pad:hover {
+  background-color: rgb(142, 124, 73);
 }
 /* .App-logo {
   height: 40vmin;
@@ -49,3 +57,9 @@
     transform: rotate(360deg);
   }
 } */
+@media screen and (max-width: 360px) {
+  .drum-pad {
+      width: 4.6rem;
+      height: 3rem;
+    }
+}

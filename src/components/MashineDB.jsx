@@ -25,7 +25,7 @@ const MashineDB = () => {
 
   return (
     < MDBContainer id="drum-machine" className=' d-flex align-items-center justify-content-center' style={{ height: '100vh'}} >
-      <MDBContainer className='square border border-4 border-dark d-flex justify-content-center align-items-center p-1' style={{maxWidth: '36rem'}}>
+      <MDBContainer className='square border border-4 border-info d-flex justify-content-center align-items-center p-1' style={{maxWidth: '36rem'}}>
         <MDBCardGroup>
           <LeftPad powerOn={powerOn} volume={volume} onAudioClick={handleAudioClick} /> {/**4 */}
           <RightPad powerOn={powerOn} togglePower={togglePower} setVolumeHandler={setVolume} displayText={displayText} setDisplayText={setDisplayText}/> {/**3 */}

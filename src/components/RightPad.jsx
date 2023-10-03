@@ -161,11 +161,12 @@ const RightPad = ({ powerOn, togglePower, setVolumeHandler, displayText, setDisp
                         onChange={togglePower}
                         color='dark'
                     />
-                    <p className='ms-2'>Power</p>
+                    <p className='ms-2 text-info'>Power</p>
                 </div>
-                <MDBContainer id='display' className={`bg-secondary text-light ${powerOn ? 'active' : ''}`} style={{ width: '12rem', height: '2rem' }}>
+                <MDBContainer id='display' className={`text-danger square border border-2 border-info d-flex align-items-center  justify-content-center ${powerOn ? 'active' : ''}`} style={{ width: '12rem', height: '2rem' }}>
                     {displayText}
                 </MDBContainer>
+                <p className='mt-3 mb-0 text-info'>Volume</p>
                 <MDBRange
                     value={volume}
                     onChange={(event) => {
@@ -173,10 +174,11 @@ const RightPad = ({ powerOn, togglePower, setVolumeHandler, displayText, setDisp
                         setVolumeHandler(event.target.value);
                     }}
                     id='customRange'
-                    label='Volume'
+                    color='secondary'
+                    className='my-2 px-4'
                 />
                 <div>
-                    <MDBBtnGroup shadow='0'>
+                    {/* <MDBBtnGroup shadow='0'>
                         <MDBRadio btn btnColor='secondary' id='btn-radio' name='options' wrapperTag='span' label='Heater Kit' />
                         <MDBRadio
                             btn
@@ -188,7 +190,7 @@ const RightPad = ({ powerOn, togglePower, setVolumeHandler, displayText, setDisp
                             label='Smooth Piano Kit'
                             defaultChecked
                         />
-                    </MDBBtnGroup>
+                    </MDBBtnGroup> */}
                 </div>
             </MDBCardBody>
         </MDBCard>
